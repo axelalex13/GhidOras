@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/intercontin_noaptea"
+        android:scaleType = "centerCrop"/>
+
+    <!--<TextView-->
+        <!--android:id="@+id/bunVenit"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginBottom="212dp"-->
+        <!--android:fontFamily="monospace"-->
+        <!--android:text="Bun venit!"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="30sp" />-->
+    <ImageView
+        android:id="@+id/bunVenit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+         android:text="Bun venit!"
+        android:src="@drawable/mylogo"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="114dp" />
+
+    <TextView
+        android:id="@+id/bunVenitText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bunVenit"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="monospace"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+
+</RelativeLayout>
