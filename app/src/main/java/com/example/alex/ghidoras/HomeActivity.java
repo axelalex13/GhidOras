@@ -1,14 +1,19 @@
 package com.example.alex.ghidoras;
 
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.alex.ghidoras.AddFragment.OnFragmentInteractionListener;
+
 public class HomeActivity extends AppCompatActivity
-        implements AddFragment.OnFragmentInteractionListener,EventFragment.OnFragmentInteractionListener {
+        implements OnFragmentInteractionListener,EventFragment.OnFragmentInteractionListener {
     ViewPager view_pager;
     ViewPagerAdapter adapter;
     public static SlidingTabLayout tabs;
@@ -20,10 +25,13 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getSupportActionBar().setTitle("Ghid Oras");
-        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.blureed_top));
         getSupportActionBar().setIcon(getResources().getDrawable(R.drawable.user));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.black)));
 
-        this.getSupportActionBar().setElevation(0);
+//        this.getSupportActionBar().setElevation(0);
+
+
+
 
        /// Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
                 adapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs);
@@ -67,8 +75,14 @@ public class HomeActivity extends AppCompatActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
+        int id = item.getItemId();
+        if (id == R.id.menu_lang) {
+
+            Intent i = new Intent(HomeActivity.this, UserProfile.class);
+            startActivity(i);
+
+        }
         return super.onOptionsItemSelected(item);
     }
 }

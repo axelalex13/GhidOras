@@ -2,20 +2,27 @@ package com.example.alex.ghidoras;
 
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import java.util.Locale;
 
@@ -115,6 +122,48 @@ public class RegisterActivity extends AppCompatActivity {
                     String type = "register";
                     BackgroundWorker backgroundWorker = new BackgroundWorker(RegisterActivity.this);
                     backgroundWorker.execute(type, emailString, parolaString, numeString, prenumeString, data_nasteriiS, adresaString, sexString);
+                    AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+                        UserLogin userLogIn = new UserLogin();
+
+                        @Override
+                        protected Void doInBackground(Void... params) {
+                            String register = ApiConnectorRegister.register(emailString, parolaString,
+                                    numeString, prenumeString, data_nasteriiS, adresaString, sexString);
+                            Log.v("am primit la register", register);
+                            Gson g = new Gson();
+                            userLogIn = g.fromJson(register, UserLogin.class);
+                            return null;
+                        }
+
+                        protected void onPostExecute(Void param) {
+                            if (userLogIn.getStatus().equals("Ok")) {
+                                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("userInfo", Context
+                                        .MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("email", emailString);
+                                editor.putString("password", parolaString);
+                                editor.putBoolean("logged", true);
+                                editor.putString("nume",userLogIn.getNume());
+                                editor.putString("prenume",userLogIn.getPrenume());
+                                editor.putString("data_nasterii",userLogIn.getData_nasterii());
+                                editor.putString("id",userLogIn.getId_utilizator());
+                                editor.putString("sex",userLogIn.getSex());
+
+                                editor.apply();
+                                Toast.makeText(getApplicationContext(), "Welocome back "+userLogIn.getPrenume()+"!",
+                                        Toast.LENGTH_SHORT).show();
+
+
+                            } else {
+
+                                Toast.makeText(getApplicationContext(), "Exista un cont cu aceasta adresa de mail", Toast
+                                        .LENGTH_SHORT).show();
+                            }
+                        }
+                    };
+                    task.execute();
+
+
                 }else {
                     Toast.makeText(RegisterActivity.this, "Parolele nu coincid", Toast.LENGTH_SHORT).show();
                 }

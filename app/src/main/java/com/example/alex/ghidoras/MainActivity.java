@@ -41,12 +41,66 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 final String emailString = email.getText().toString();
                 final String passwordString = parola.getText().toString();
-                String type = "login";
-                BackgroundWorker backgroundWorker = new BackgroundWorker(MainActivity.this);
-                backgroundWorker.execute(type, emailString, passwordString);
+//                String type = "login";
+//                BackgroundWorker backgroundWorker = new BackgroundWorker(MainActivity.this);
+//                backgroundWorker.execute(type, emailString, passwordString);
+                AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 
+                     UserLogin userLogIn = new UserLogin();
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        String s = ApiConnectorLogin.logIn(emailString, passwordString,true);
+
+                        Log.v("am primit in login", s);
+                        Gson g = new Gson();
+                        userLogIn = g.fromJson(s, UserLogin.class);
+
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void aVoid) {
+                        super.onPostExecute(aVoid);
+
+                        if (userLogIn.getStatus().equals("ok")) {
+                            // new getCandidate().execute(candidateId);
+                            SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("userInfo", Context
+                                    .MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("email", emailString);
+                            editor.putString("password", passwordString);
+                            editor.putBoolean("logged", true);
+                            editor.putString("nume",userLogIn.getNume());
+                            editor.putString("prenume",userLogIn.getPrenume());
+                            editor.putString("data_nasterii",userLogIn.getData_nasterii());
+                            editor.putString("id",userLogIn.getId_utilizator());
+                            editor.putString("sex",userLogIn.getSex());
+
+                            editor.apply();
+                            Toast.makeText(getApplicationContext(), "Welocome back "+userLogIn.getPrenume()+"!",
+                                    Toast.LENGTH_SHORT).show();
+
+//                            Intent intent = new Intent(getActivity(), HomeActivityCandidate.class);
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//                            startActivity(intent);
+                            Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                            getApplicationContext().startActivity(i);
+
+
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), "Parola gresita/Cont inexistent",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                };
+
+                task.execute();
             }
         });
 
