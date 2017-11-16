@@ -1,4 +1,4 @@
-package com.example.alex.ghidoras;
+package com.example.alex.ghidoras.utils;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -6,6 +6,11 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
+
+import com.example.alex.ghidoras.AddFragment;
+import com.example.alex.ghidoras.EventFragment;
+import com.example.alex.ghidoras.MyApplication;
+import com.example.alex.ghidoras.R;
 
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {

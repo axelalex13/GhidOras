@@ -1,6 +1,8 @@
 package com.example.alex.ghidoras;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,6 +29,31 @@ public class IntroActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().hide();
         setContentView(R.layout.activity_intro);
+
+        final SharedPreferences sharedPreferences = getSharedPreferences("userInfo", Context
+                .MODE_PRIVATE);
+
+        isLogged = sharedPreferences.getBoolean("logged", false);
+
+//        if (isLogged) {
+//
+//            Intent intent = new Intent(this, HomeActivity.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//            startActivity(intent);
+//        } else{
+//
+//            Intent intent = new Intent(this, MainActivity.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//            startActivity(intent);
+//
+//        }
+
+
+
         bunVenit = (ImageView) findViewById(R.id.bunVenit);
         bunVenitText = (TextView)findViewById(R.id.bunVenitText);
         bunVenit.animate().translationY(300f);

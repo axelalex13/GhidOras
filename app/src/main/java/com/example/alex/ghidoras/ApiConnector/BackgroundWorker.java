@@ -1,4 +1,4 @@
-package com.example.alex.ghidoras;
+package com.example.alex.ghidoras.ApiConnector;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -18,6 +18,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.example.alex.ghidoras.HomeActivity;
+import com.example.alex.ghidoras.IntroActivity;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

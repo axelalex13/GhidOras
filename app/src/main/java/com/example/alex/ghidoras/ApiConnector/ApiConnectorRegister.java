@@ -1,16 +1,5 @@
-package com.example.alex.ghidoras;
+package com.example.alex.ghidoras.ApiConnector;
 
-/**
- * Created by alex on 14.11.2017.
- */
-
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -20,21 +9,31 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by Cristi Nica on 20.07.2017.
+ * Created by alex on 14.11.2017.
  */
 
-public class ApiConnectorLogin {
-    String ip = "http://192.168.0.105";
-    public static String apiURL = "http://192.168.0.105/login.php";
+public class ApiConnectorRegister {
+    public static String apiURL = "http://192.168.0.105/register.php";
 
-    public static String logIn(String email, String password, boolean rememberMe) {
+
+    public static String register(String email, String parola, String nume, String prenume, String data_nasterii, String adresa, String sex) {
         HttpURLConnection connection = null;
 
         try {
             URL url = new URL(apiURL);
-            JSONObject postDataParams = new JSONObject();
-            postDataParams.put("email", email);
-            postDataParams.put("password", password);
+
+
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("email", email);
+            jsonObject.put("parola", parola);
+            jsonObject.put("nume", nume);
+            jsonObject.put("prenume", prenume);
+            jsonObject.put("data_nasterii", data_nasterii);
+            jsonObject.put("adresa", adresa);
+            jsonObject.put("sex", sex);
+
+
             connection = (HttpURLConnection) url.openConnection();
             connection.setReadTimeout(15000);
             connection.setConnectTimeout(15000);
@@ -44,7 +43,7 @@ public class ApiConnectorLogin {
             connection.setDoInput(true);
             connection.setDoOutput(true);
             OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
-            out.write(postDataParams.toString());
+            out.write(jsonObject.toString());
             out.close();
             StringBuilder sb = new StringBuilder();
             sb.append("");
@@ -53,15 +52,14 @@ public class ApiConnectorLogin {
                 BufferedReader br = new BufferedReader(new InputStreamReader(
                         connection.getInputStream(), "utf-8"));
                 String line = null;
-
                 while ((line = br.readLine()) != null) {
                     sb.append(line + "\n");
                 }
                 br.close();
-
             } else {
                 System.out.println(connection.getResponseMessage());
             }
+            System.out.println("aici: " + sb.toString());
             return sb.toString();
         } catch (Exception e) {
             return new String("Exception: " + e.getMessage());
@@ -70,4 +68,3 @@ public class ApiConnectorLogin {
         }
     }
 }
-

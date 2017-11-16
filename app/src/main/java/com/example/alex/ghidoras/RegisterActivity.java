@@ -5,13 +5,11 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.ColorDrawable;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +20,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.alex.ghidoras.ApiConnector.ApiConnectorRegister;
 import com.google.gson.Gson;
 
 import java.util.Locale;
@@ -117,11 +116,8 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
 
-
-                if(parolaString.equals(parolaConfirmString)) {
-                    String type = "register";
-                    BackgroundWorker backgroundWorker = new BackgroundWorker(RegisterActivity.this);
-                    backgroundWorker.execute(type, emailString, parolaString, numeString, prenumeString, data_nasteriiS, adresaString, sexString);
+            if(!numeString.equals("") && !prenumeString.equals("") && !data_nasteriiS.equals("") && !emailString.equals("") && !parolaString.equals("") && !adresaString.equals("") ) {
+                if (parolaString.equals(parolaConfirmString)) {
                     AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
                         UserLogin userLogIn = new UserLogin();
 
@@ -136,22 +132,24 @@ public class RegisterActivity extends AppCompatActivity {
                         }
 
                         protected void onPostExecute(Void param) {
-                            if (userLogIn.getStatus().equals("Ok")) {
+                            if (userLogIn.getStatus().equals("ok")) {
                                 SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("userInfo", Context
                                         .MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("email", emailString);
                                 editor.putString("password", parolaString);
                                 editor.putBoolean("logged", true);
-                                editor.putString("nume",userLogIn.getNume());
-                                editor.putString("prenume",userLogIn.getPrenume());
-                                editor.putString("data_nasterii",userLogIn.getData_nasterii());
-                                editor.putString("id",userLogIn.getId_utilizator());
-                                editor.putString("sex",userLogIn.getSex());
+                                editor.putString("nume", userLogIn.getNume());
+                                editor.putString("prenume", userLogIn.getPrenume());
+                                editor.putString("data_nasterii", userLogIn.getData_nasterii());
+                                editor.putString("id", userLogIn.getId_utilizator());
+                                editor.putString("sex", userLogIn.getSex());
 
                                 editor.apply();
-                                Toast.makeText(getApplicationContext(), "Welocome back "+userLogIn.getPrenume()+"!",
+                                Toast.makeText(getApplicationContext(), "Welocome to GhidOras,  " + userLogIn.getPrenume() + "!",
                                         Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                                getApplicationContext().startActivity(i);
 
 
                             } else {
@@ -164,9 +162,12 @@ public class RegisterActivity extends AppCompatActivity {
                     task.execute();
 
 
-                }else {
+                } else {
                     Toast.makeText(RegisterActivity.this, "Parolele nu coincid", Toast.LENGTH_SHORT).show();
                 }
+            }else {
+                Toast.makeText(RegisterActivity.this, "Completati toate campurile!", Toast.LENGTH_SHORT).show();
+            }
 
 
             }

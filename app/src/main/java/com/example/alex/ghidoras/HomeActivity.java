@@ -7,10 +7,12 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.alex.ghidoras.AddFragment.OnFragmentInteractionListener;
+import com.example.alex.ghidoras.utils.ViewPagerAdapter;
 
 public class HomeActivity extends AppCompatActivity
         implements OnFragmentInteractionListener,EventFragment.OnFragmentInteractionListener {
@@ -25,8 +27,9 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getSupportActionBar().setTitle("Ghid Oras");
-        getSupportActionBar().setIcon(getResources().getDrawable(R.drawable.user));
+        getSupportActionBar().setIcon(getResources().getDrawable(R.drawable.man));
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.black)));
+
 
 //        this.getSupportActionBar().setElevation(0);
 
@@ -34,7 +37,7 @@ public class HomeActivity extends AppCompatActivity
 
 
        /// Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-                adapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs);
+        adapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs);
 
         // Assigning ViewPager View and setting the adapter
         view_pager = (ViewPager) findViewById(R.id.view_pagerHome);
@@ -51,7 +54,7 @@ public class HomeActivity extends AppCompatActivity
         tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
             public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.myGrey);
+                return getResources().getColor(R.color.white);
             }
         });
 
