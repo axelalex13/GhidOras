@@ -13,7 +13,7 @@ import java.net.URL;
  */
 
 public class ApiConnectorRegister {
-    public static String apiURL = "http://192.168.0.105/register.php";
+    public static String apiURL = "http://192.168.0.102/register.php";
 
 
     public static String register(String email, String parola, String nume, String prenume, String data_nasterii, String adresa, String sex) {

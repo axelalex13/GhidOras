@@ -5,7 +5,7 @@ package com.example.alex.ghidoras;
  */
 
 public class UserLogin {
-    private String id_utilizator;
+    private String id;
     private String nume;
     private String prenume;
     private String email;
@@ -54,12 +54,12 @@ public class UserLogin {
         this.nume = nume;
     }
 
-    public String getId_utilizator() {
-        return id_utilizator;
+    public String getId() {
+        return id;
     }
 
-    public void setId_utilizator(String id_utilizator) {
-        this.id_utilizator = id_utilizator;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getStatus() {

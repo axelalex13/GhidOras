@@ -1,38 +1,28 @@
 package com.example.alex.ghidoras.ApiConnector;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 /**
- * Created by alex on 14.11.2017.
+ * Created by alex on 06.12.2017.
  */
 
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
+public class ApiConnectorLocation {
+    public static String ip = "http://192.168.0.105";
+    public static String apiURL = "http://192.168.0.102/getLocation.php";
 
 
-
-public class ApiConnectorLogin {
-    public static String ip = "http://192.168.0.102";
-    public static String apiURL = "http://192.168.0.102/login.php";
-
-    public static String logIn(String email, String password, boolean rememberMe) {
+    public static String getLocations() {
         HttpURLConnection connection = null;
 
         try {
             URL url = new URL(apiURL);
             JSONObject postDataParams = new JSONObject();
-            postDataParams.put("email", email);
-            postDataParams.put("password", password);
             connection = (HttpURLConnection) url.openConnection();
             connection.setReadTimeout(15000);
             connection.setConnectTimeout(15000);
@@ -67,5 +57,5 @@ public class ApiConnectorLogin {
             connection.disconnect();
         }
     }
-}
 
+}

@@ -142,7 +142,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 editor.putString("nume", userLogIn.getNume());
                                 editor.putString("prenume", userLogIn.getPrenume());
                                 editor.putString("data_nasterii", userLogIn.getData_nasterii());
-                                editor.putString("id", userLogIn.getId_utilizator());
+                                editor.putString("id", userLogIn.getId());
                                 editor.putString("sex", userLogIn.getSex());
 
                                 editor.apply();
