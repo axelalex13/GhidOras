@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alex.ghidoras.ApiConnector.ApiConnectorRegister;
+import com.example.alex.ghidoras.utils.UserLogin;
 import com.google.gson.Gson;
 
 import java.util.Locale;

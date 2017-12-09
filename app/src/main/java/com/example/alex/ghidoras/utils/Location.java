@@ -1,4 +1,4 @@
-package com.example.alex.ghidoras;
+package com.example.alex.ghidoras.utils;
 
 /**
  * Created by alex on 06.12.2017.
@@ -6,8 +6,8 @@ package com.example.alex.ghidoras;
 
 public class Location {
     private String id;
-    private String nume;
-    private String descriere;
+    private String nume_locatie;
+    private String descriere_locatie;
     private String adresa;
 
     public String getAdresa() {
@@ -19,19 +19,19 @@ public class Location {
     }
 
     public String getDescriere() {
-        return descriere;
+        return descriere_locatie;
     }
 
-    public void setDescriere(String descriere) {
-        this.descriere = descriere;
+    public void setDescriere(String descriere_locatie) {
+        this.descriere_locatie = descriere_locatie;
     }
 
     public String getNume() {
-        return nume;
+        return nume_locatie;
     }
 
     public void setNume(String nume) {
-        this.nume = nume;
+        this.nume_locatie = nume;
     }
 
     public String getId() {

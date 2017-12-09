@@ -4,13 +4,17 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -20,23 +24,26 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alex.ghidoras.ApiConnector.ApiConnectorEvent;
 import com.example.alex.ghidoras.ApiConnector.ApiConnectorLocation;
-import com.example.alex.ghidoras.ApiConnector.ApiConnectorLogin;
-import com.example.alex.ghidoras.ApiConnector.ApiConnectorRegister;
+import com.example.alex.ghidoras.utils.Location;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
+import static android.app.Activity.RESULT_OK;
 
 
 /**
@@ -52,10 +59,12 @@ public class AddFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static int RESULT_LOAD_IMAGE = 1;
     static public List<Location> locations = new ArrayList<Location>();
     ArrayList<String> locationName = new ArrayList<>();
     LinkedHashMap<String,Location> hashMap = new LinkedHashMap<>();
     View view;
+    String event;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -215,6 +224,74 @@ public class AddFragment extends Fragment {
 
         task.execute();
 
+       final SeekBar seekBar = (SeekBar) view.findViewById(R.id.seekBar);
+        final TextView textView = (TextView) view.findViewById(R.id.editText9);
+        // Initialize the textview with '0'
+        int progress = seekBar.getProgress();
+
+        textView.setText(Integer.toString(progress));
+//        textView.setEnabled(false);
+        seekBar.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener() {
+                    int progress = 0;
+
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
+                        progress = progressValue;
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                        // Display the value in textview
+                        textView.setText(Integer.toString(progress));
+                    }
+                });
+
+        TextView addImage = (TextView) view.findViewById(R.id.textView10);
+        addImage.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View arg0) {
+
+                new SweetAlertDialog(getActivity(), SweetAlertDialog.NORMAL_TYPE)
+                        .setTitleText("Adauga cover")
+                        .setContentText("Vrei sa adaugi o imagine?")
+                        .setConfirmText("Da")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                sDialog.dismiss();
+                                if (!checkWriteExternalPermission()) {
+                                    String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE"};
+                                    int permsRequestCode = 200;
+                                    requestPermissions(perms, permsRequestCode);
+                                } else {
+                                    //pickPhoto();
+                                    Intent i = new Intent(
+                                            Intent.ACTION_PICK,
+                                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                    startActivityForResult(i, RESULT_LOAD_IMAGE);
+                                }
+                            }
+                        })
+                        .setCancelText("Nu")
+                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            public void onClick(SweetAlertDialog sDialog) {
+                                sDialog.dismiss();
+                            }
+                        })
+                        .show();
+            }
+
+        });
+
+        final ImageView cover = (ImageView) view.findViewById(R.id.coperta);
+  
         adauga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -225,29 +302,71 @@ public class AddFragment extends Fragment {
                 final String dataSfarsit = endingDate.getText().toString();
                 final String dataInceput = startingDate.getText().toString();
                 final String locatie = dropdown2.getSelectedItem().toString();
-                final String id_oraganizator = sharedPreferencesUser.getString("id","");
+                final String id_oraganizator = sharedPreferencesUser.getString("id", "");
                 final String id_locatie = hashMap.get(locatie).getId();
+                final String numar = textView.getText().toString();
 
-               // Log.v("duc in api",numeS + descriereS + " "+dataSfarsit +" "+ dataInceput +" "+ locatie +" "+ id_oraganizator + " "+ id_locatie);
-                AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+                // Log.v("duc in api",numeS + descriereS + " "+dataSfarsit +" "+ dataInceput +" "+ locatie +" "+ id_oraganizator + " "+ id_locatie);
+                if (!numeS.equals("") && !descriereS.equals("") && !locatie.equals("") && !descriereS.equals("0") && !dataSfarsit.equals("0") && !dataInceput.equals("0")) {
 
 
-                    @Override
-                    protected Void doInBackground(Void... params) {
-                        String event = ApiConnectorEvent.addEvent(numeS, descriereS,
-                                id_locatie, dataInceput, dataSfarsit,"50", id_oraganizator);
-                        Log.v("am primit la add", event);
+                    AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 
-                        return null;
-                    }
 
-                    protected void onPostExecute(Void param) {
+                        @Override
+                        protected Void doInBackground(Void... params) {
+                             event = ApiConnectorEvent.addEvent(numeS, descriereS,
+                                    id_locatie, dataInceput, dataSfarsit, numar, id_oraganizator);
+                            Log.v("am primit la add", event);
 
-                    }
-                };
-                task.execute();
+
+                            return null;
+                        }
+
+                        protected void onPostExecute(Void param) {
+                            if (event.equals("add event succes\n")) {
+                                final SweetAlertDialog alertDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.SUCCESS_TYPE);
+
+                                alertDialog.setTitle("Eveniment adaugat cu succes!");
+
+                                alertDialog.setConfirmText("Ok");
+                                alertDialog.show();
+                                alertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        alertDialog.dismiss();
+                                    }
+                                });
+
+                            } else {
+                                final SweetAlertDialog alertDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
+                                alertDialog.setTitle("Evenimentul NU a fost adaugat!");
+                                alertDialog.setContentText("Something went wrong :( ");
+                                alertDialog.setConfirmText("Ok");
+                                alertDialog.show();
+                                alertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        alertDialog.dismiss();
+                                    }
+                                });
+                            }
+
+                        }
+                    };
+                    task.execute();
+                }else{
+                    Toast.makeText(getActivity(), "Nu ati completat toate campurile!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
+
+
+
+
+
+
 
         return view;
     }
@@ -289,5 +408,46 @@ public class AddFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+    //Metode pentru a verifica daca proprietatea e garantata deja
+
+    public boolean checkWriteExternalPermission() {
+        String permission = "android.permission.WRITE_EXTERNAL_STORAGE";
+        int res = getActivity().checkCallingOrSelfPermission(permission);
+        return (res == PackageManager.PERMISSION_GRANTED);
+    }
+
+    /*
+    Metoda pentru alegerea noii poze si salvarea acesteia
+     */
+    public void pickPhoto() {
+        Intent i = new Intent(
+                Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(i, RESULT_LOAD_IMAGE);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        //EDITARE IMAGINE DE PROFIL
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            Cursor cursor = getActivity().getApplicationContext().getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            ImageView imageView = (ImageView) view.findViewById(R.id.coperta);
+            Bitmap image = BitmapFactory.decodeFile(picturePath);
+            int newDim = (int) (image.getHeight() * (512.0 / image.getWidth()));
+            Bitmap scaled = Bitmap.createScaledBitmap(image, 512, newDim, true);
+            imageView.setImageBitmap(scaled);
+
+
+        }
     }
 }

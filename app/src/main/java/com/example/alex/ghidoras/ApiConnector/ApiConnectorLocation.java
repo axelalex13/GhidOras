@@ -13,8 +13,8 @@ import java.net.URL;
  */
 
 public class ApiConnectorLocation {
-    public static String ip = "http://192.168.0.105";
-    public static String apiURL = "http://192.168.0.102/getLocation.php";
+    public static String ip = ApiConnectorEvent.ip;
+    public static String apiURL = ip + "/getLocation.php";
 
 
     public static String getLocations() {

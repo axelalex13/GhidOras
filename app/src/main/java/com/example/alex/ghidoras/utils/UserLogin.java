@@ -1,4 +1,4 @@
-package com.example.alex.ghidoras;
+package com.example.alex.ghidoras.utils;
 
 /**
  * Created by alex on 14.11.2017.

@@ -2,11 +2,28 @@ package com.example.alex.ghidoras;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+
+import com.example.alex.ghidoras.ApiConnector.ApiConnectionGetEvents;
+import com.example.alex.ghidoras.ApiConnector.ApiConnectorLocation;
+import com.example.alex.ghidoras.utils.Event;
+import com.example.alex.ghidoras.utils.Location;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -22,11 +39,12 @@ public class EventFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    View view;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    EventsAdapter adapter;
+    static public List<Event> events = new ArrayList<Event>();
     private OnFragmentInteractionListener mListener;
 
     public EventFragment() {
@@ -64,7 +82,53 @@ public class EventFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_event, container, false);
+        view =  inflater.inflate(R.layout.fragment_event, container, false);
+
+        final RecyclerView recList = (RecyclerView) view.findViewById(R.id.my_recycler_view);
+        recList.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(getContext());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recList.setLayoutManager(llm);
+
+
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                String s = ApiConnectionGetEvents.getEvents();
+
+                Log.v("am primit la get Events", s);
+                Gson g = new Gson();
+                events = g.fromJson(s,  new TypeToken<List<Event>>(){}.getType());
+
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+
+                super.onPostExecute(aVoid);
+
+                Log.v("lista mea",events.get(0).toString());
+
+                adapter = new EventsAdapter(getContext(), EventFragment.events);
+                recList.setItemAnimator(new DefaultItemAnimator());
+                recList.setAdapter(adapter);
+            }
+        };
+
+        task.execute();
+
+
+
+
+
+
+
+
+        return  view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

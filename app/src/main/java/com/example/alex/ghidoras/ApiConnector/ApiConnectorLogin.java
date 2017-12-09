@@ -22,8 +22,9 @@ import java.net.URL;
 
 
 public class ApiConnectorLogin {
-    public static String ip = "http://192.168.0.102";
-    public static String apiURL = "http://192.168.0.102/login.php";
+
+    public static String ip = ApiConnectorEvent.ip;
+    public static String apiURL = ip + "/login.php";
 
     public static String logIn(String email, String password, boolean rememberMe) {
         HttpURLConnection connection = null;

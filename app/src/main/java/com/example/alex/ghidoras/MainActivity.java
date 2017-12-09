@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alex.ghidoras.ApiConnector.ApiConnectorLogin;
+import com.example.alex.ghidoras.utils.UserLogin;
 import com.google.gson.Gson;
 
 public class MainActivity extends AppCompatActivity {
