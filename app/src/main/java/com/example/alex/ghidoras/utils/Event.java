@@ -8,7 +8,7 @@ public class Event {
 
 
     private int id;
-    private String name;
+    private String nume;
     private String descriere;
     private int numar_persoane;
     private String data_sfarsit;
@@ -28,11 +28,11 @@ public class Event {
     }
 
     public String getName() {
-        return name;
+        return nume;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.nume = name;
     }
 
     public String getDescriere() {

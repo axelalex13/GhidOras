@@ -43,9 +43,11 @@ public class EventFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    EventsAdapter adapter;
-    static public List<Event> events = new ArrayList<Event>();
+    private RecyclerView.LayoutManager layoutManager;
+    CustomAdapter adapter;
+    static public ArrayList<Event> events = new ArrayList<Event>();
     private OnFragmentInteractionListener mListener;
+
 
     public EventFragment() {
         // Required empty public constructor
@@ -84,12 +86,7 @@ public class EventFragment extends Fragment {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_event, container, false);
 
-        final RecyclerView recList = (RecyclerView) view.findViewById(R.id.my_recycler_view);
-        recList.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(getContext());
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recList.setLayoutManager(llm);
-
+        final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
 
         AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 
@@ -100,7 +97,7 @@ public class EventFragment extends Fragment {
 
                 Log.v("am primit la get Events", s);
                 Gson g = new Gson();
-                events = g.fromJson(s,  new TypeToken<List<Event>>(){}.getType());
+                events = g.fromJson(s,  new TypeToken<ArrayList<Event>>(){}.getType());
 
 
                 return null;
@@ -112,16 +109,25 @@ public class EventFragment extends Fragment {
                 super.onPostExecute(aVoid);
 
                 Log.v("lista mea",events.get(0).toString());
+                recyclerView.setHasFixedSize(true);
 
-                adapter = new EventsAdapter(getContext(), EventFragment.events);
-                recList.setItemAnimator(new DefaultItemAnimator());
-                recList.setAdapter(adapter);
+                layoutManager = new LinearLayoutManager(getContext());
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
+                // removedItems = new ArrayList<Integer>();
+
+                adapter = new CustomAdapter(events);
+                recyclerView.setAdapter(adapter);
+
+//                adapter = new EventsAdapter(getContext(), EventFragment.events);
+//                recList.setItemAnimator(new DefaultItemAnimator());
+//                recList.setAdapter(adapter);
             }
         };
 
         task.execute();
-
-
 
 
 
