@@ -5,13 +5,14 @@ package com.example.alex.ghidoras.utils;
  */
 
 public class UserLogin {
-    private String id;
+    private String id_utilizator;
     private String nume;
     private String prenume;
     private String email;
     private String sex;
     private String data_nasterii;
     private String status;
+    private String id_organizator = String.valueOf(Integer.MIN_VALUE);
 
     public String getData_nasterii() {
         return data_nasterii;
@@ -54,19 +55,27 @@ public class UserLogin {
         this.nume = nume;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getId_organizator() {
+        return id_organizator;
+    }
+
+    public void setId_organizator(String id_organizator) {
+        this.id_organizator = id_organizator;
+    }
+
+    public String getId_utilizator() {
+        return id_utilizator;
+    }
+
+    public void setId_utilizator(String id_utilizator) {
+        this.id_utilizator = id_utilizator;
     }
 }

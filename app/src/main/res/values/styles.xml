@@ -13,9 +13,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <!--HAIDE MA -->
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="spinner_style">
         <item name="android:layout_width">match_parent</item>
@@ -39,6 +39,7 @@
         <item name="actionMenuTextColor">@android:color/white</item>
 
     </style>
+
     <style name="TextAppearance.FontPath" parent="android:TextAppearance">
 
         <item name="fontPath">fonts/RobotoCondensed-Regular.ttf</item>
@@ -53,6 +54,7 @@
         <item name="colorControlNormal">@android:color/white</item>
         <item name="colorControlActivated">@android:color/white</item>
     </style>
+
     <style name="MyTheme" parent="@android:style/Theme.Holo.Light">
         <item name="android:actionBarStyle">@style/MyTheme.ActionBarStyle</item>
     </style>

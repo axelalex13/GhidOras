@@ -4,6 +4,8 @@ package com.example.alex.ghidoras;
  * Created by alex on 09.12.2017.
  */
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         TextView textViewLocatie;
         TextView textViewAdresa;
         ImageView coperta;
+        public Context context;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -36,6 +39,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             this.textViewLocatie = (TextView) itemView.findViewById(R.id.locatie);
 
             this.coperta = (ImageView) itemView.findViewById(R.id.coperta);
+
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent=new Intent(v.getContext(), Details.class);
+//
+//                    v.getContext().startActivity(intent);
+//
+//                }
+//            });
         }
     }
 
@@ -49,7 +62,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.cards_layout, parent, false);
 
-        //view.setOnClickListener(AddFragment.myOnClickListener);
+
 
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
@@ -83,6 +96,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         {
             coperta.setImageResource(R.drawable.biblioteca);
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    Intent intent=new Intent(v.getContext(), Details.class);
+                    intent.putExtra("position",listPosition);
+                    v.getContext().startActivity(intent);
+
+            }
+        } );
+
 
 
 

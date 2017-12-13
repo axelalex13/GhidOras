@@ -24,7 +24,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -290,6 +292,84 @@ public class AddFragment extends Fragment {
 
         });
 
+        final Button addLocation  = (Button) view.findViewById(R.id.addLocation);
+        addLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final SweetAlertDialog customAddCourseDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.NORMAL_TYPE);
+                LayoutInflater inflater2 = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final View view2 = inflater2.inflate(R.layout.custom_dialog_add_location, null);
+
+                final EditText numeLocatie = (EditText) view2.findViewById(R.id.numeLocatie);
+                numeLocatie.setHint("Nume locatie:");
+                final EditText descriereLocatie = (EditText) view2.findViewById(R.id.descriereLocatie);
+                descriereLocatie.setHint("Descriere locatie:");
+                final EditText adresa = (EditText) view2.findViewById(R.id.adresa);
+                adresa.setHint("Adresa");
+
+                customAddCourseDialog.show();
+                customAddCourseDialog.setCustomView(view2);
+                customAddCourseDialog.setTitleText("Adauga o noua locatie");
+                customAddCourseDialog.setConfirmText("Adauga");
+                customAddCourseDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismiss();
+                        final String numeLocatieS = numeLocatie.getText().toString();
+                        final String descriereLocatieS = descriereLocatie.getText().toString();
+                        final String adresaS = adresa.getText().toString();
+                        AsyncTask<Void, Void, Void> task3 = new AsyncTask<Void, Void, Void>() {
+
+
+                            @Override
+                            protected Void doInBackground(Void... params) {
+                                event = ApiConnectorLocation.addLocation(numeLocatieS, descriereLocatieS, adresaS);
+                                Log.v("am primit la location", event);
+
+
+                                return null;
+                            }
+
+                            protected void onPostExecute(Void param) {
+                                if (event.equals("add location succes\n")) {
+                                    final SweetAlertDialog alertDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.SUCCESS_TYPE);
+
+                                    alertDialog.setTitle("Locatie adaugata cu succes!");
+
+                                    alertDialog.setConfirmText("Ok");
+                                    alertDialog.show();
+                                    alertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                        @Override
+                                        public void onClick(SweetAlertDialog sDialog) {
+                                            alertDialog.dismiss();
+                                        }
+                                    });
+
+                                } else {
+                                    final SweetAlertDialog alertDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
+                                    alertDialog.setTitle("Locatia NU a fost adaugat!");
+                                    alertDialog.setContentText("Something went wrong :( ");
+                                    alertDialog.setConfirmText("Ok");
+                                    alertDialog.show();
+                                    alertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                        @Override
+                                        public void onClick(SweetAlertDialog sDialog) {
+                                            alertDialog.dismiss();
+                                        }
+                                    });
+                                }
+
+                            }
+                        };
+                        task3.execute();
+
+                    }
+                });
+
+
+            }
+        });
+
         final ImageView cover = (ImageView) view.findViewById(R.id.coperta);
   
         adauga.setOnClickListener(new View.OnClickListener() {
@@ -302,7 +382,7 @@ public class AddFragment extends Fragment {
                 final String dataSfarsit = endingDate.getText().toString();
                 final String dataInceput = startingDate.getText().toString();
                 final String locatie = dropdown2.getSelectedItem().toString();
-                final String id_oraganizator = sharedPreferencesUser.getString("id", "");
+                final String id_oraganizator = sharedPreferencesUser.getString("id_organizator", "");
                 final String id_locatie = hashMap.get(locatie).getId();
                 final String numar = textView.getText().toString();
 

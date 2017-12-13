@@ -27,16 +27,18 @@
             <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nume eveniment:"
                 android:layout_marginLeft="10dp"
             android:id="@+id/textView2"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true" />
 
             <EditText
+                android:background="@drawable/edittext"
                 android:id="@+id/nume"
+                android:hint="Nume eveniment"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:paddingLeft="10dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_below="@+id/textView2"
@@ -54,13 +56,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Descriere:"
+                android:text=""
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/textView3" />
 
             <EditText
                 android:id="@+id/descriere"
+                android:background="@drawable/edittext"
+                android:hint="Descriere"
+                android:paddingLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginRight="20dp"
@@ -74,9 +79,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/layoutLocatie"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="18dp"
             android:layout_below="@+id/layoutDescriere"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,6 +93,7 @@
 
             <Spinner
                 android:id="@+id/locatie"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -95,6 +102,21 @@
                 android:inputType="textMultiLine"
                 android:layout_below="@+id/textView4"
                 android:layout_alignStart="@+id/textView4" />
+
+            <Button
+
+                android:id="@+id/addLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="Adauga o noua locatie"
+                android:textSize="10sp"
+                android:background="@drawable/button2"
+                android:layout_marginRight="20dp"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                android:layout_alignTop="@+id/locatie"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="17dp" />
 
         </RelativeLayout>
     <RelativeLayout
@@ -115,6 +137,7 @@
             >
 
             <EditText
+
                 android:id="@+id/startingDate"
                 android:layout_width="108dp"
                 android:layout_height="wrap_content"
@@ -134,6 +157,7 @@
             >
 
             <EditText
+
                 android:id="@+id/endingDate"
                 android:layout_width="108dp"
                 android:layout_height="wrap_content"
@@ -147,15 +171,16 @@
             android:id="@+id/numar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/dates"
+            android:layout_marginTop="24dp"
             android:layout_below="@+id/dates"
-            android:layout_marginTop="20dp">
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp">
 
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="10dp"
                 android:text="Numarul maxim de participanti:"/>
 
             <SeekBar
@@ -172,15 +197,17 @@
             </SeekBar>
 
             <EditText
+                android:paddingLeft="10dp"
                 android:id="@+id/editText9"
+                android:background="@drawable/edittext"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/seekBar"
-                android:layout_marginStart="11dp"
-                android:layout_toEndOf="@+id/seekBar"
+                android:layout_marginStart="12dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="1">
+                android:text="1"
+                android:layout_alignTop="@+id/seekBar"
+                android:layout_toEndOf="@+id/seekBar">
 
             </EditText>
 

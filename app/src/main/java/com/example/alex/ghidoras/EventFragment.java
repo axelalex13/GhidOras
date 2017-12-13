@@ -127,6 +127,8 @@ public class EventFragment extends Fragment {
             }
         };
 
+
+
         task.execute();
 
 

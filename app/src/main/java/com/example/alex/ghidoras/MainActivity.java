@@ -73,8 +73,14 @@ public class MainActivity extends AppCompatActivity {
                             editor.putString("nume",userLogIn.getNume());
                             editor.putString("prenume",userLogIn.getPrenume());
                             editor.putString("data_nasterii",userLogIn.getData_nasterii());
-                            editor.putString("id",userLogIn.getId());
+                            editor.putString("id",userLogIn.getId_utilizator());
                             editor.putString("sex",userLogIn.getSex());
+
+                            if(userLogIn.getId_organizator() == null){
+                                editor.putString("id_organizator",String.valueOf(Integer.MIN_VALUE));
+                            }else {
+                                editor.putString("id_organizator", userLogIn.getId_organizator());
+                            }
 
                             editor.apply();
                             Toast.makeText(getApplicationContext(), "Welocome back "+userLogIn.getPrenume()+"!",
