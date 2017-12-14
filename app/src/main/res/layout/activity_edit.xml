@@ -1,0 +1,266 @@
+<ScrollView
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+        android:id="@+id/relative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layoutNume"
+            android:layout_marginTop="25dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/textView2"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:background="@drawable/edittext"
+                android:id="@+id/nume"
+                android:hint="Nume eveniment"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/textView2"
+                android:layout_alignStart="@+id/textView2" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layoutDescriere"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/layoutNume"
+            android:layout_alignParentStart="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/textView3" />
+
+            <EditText
+                android:id="@+id/descriere"
+                android:background="@drawable/edittext"
+                android:hint="Descriere"
+                android:paddingLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:inputType="textMultiLine"
+                android:layout_below="@+id/textView3"
+                android:layout_alignStart="@+id/textView3" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layoutLocatie"
+            android:layout_marginTop="18dp"
+            android:layout_below="@+id/layoutDescriere"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Locatie:"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/textView4" />
+
+            <Spinner
+                android:id="@+id/locatie"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:inputType="textMultiLine"
+                android:layout_below="@+id/textView4"
+                android:layout_alignStart="@+id/textView4" />
+
+            <Button
+
+                android:id="@+id/addLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="Adauga o noua locatie"
+                android:textSize="10sp"
+                android:background="@drawable/button2"
+                android:layout_marginRight="20dp"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                android:layout_alignTop="@+id/locatie"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="17dp" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/dates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutLocatie"
+            android:layout_marginTop="20dp"
+            >
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/startingDateWrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="30dp"
+                >
+
+                <EditText
+
+                    android:id="@+id/startingDate"
+                    android:layout_width="108dp"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:hint="Data inceput "
+                    android:textSize="14sp"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/endingDateWrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="40dp"
+                >
+
+                <EditText
+
+                    android:id="@+id/endingDate"
+                    android:layout_width="108dp"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:hint="Data sfarsit"
+                    android:textSize="14sp"/>
+            </android.support.design.widget.TextInputLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/numar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_below="@+id/dates"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Numarul maxim de participanti:"/>
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="250dp"
+                android:layout_height="30dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView12"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="22dp"
+                android:enabled="false"
+                android:max="300">
+
+            </SeekBar>
+
+            <EditText
+                android:paddingLeft="10dp"
+                android:id="@+id/editText9"
+                android:background="@drawable/edittext"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="1"
+                android:layout_alignTop="@+id/seekBar"
+                android:layout_toEndOf="@+id/seekBar">
+
+            </EditText>
+
+            <LinearLayout
+                android:id="@+id/ll_mask"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:visibility="visible"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/numar"
+            android:layout_marginTop="10dp"
+            android:id="@+id/imagine">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adauga o coperta evenimentului tau"
+                android:id="@+id/textView10"
+                android:textColor="@color/myBlue"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="20dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/coperta"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/mylogo"
+                android:layout_below="@+id/textView10"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="20dp"/>
+
+
+
+        </RelativeLayout>
+        <Button
+            android:id="@+id/save"
+            android:layout_below="@+id/imagine"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button2"
+            android:textSize="16sp"
+            android:text="Salveaza"
+            android:layout_marginBottom="20dp"/>
+
+
+    </RelativeLayout>
+
+
+</ScrollView>

@@ -35,7 +35,6 @@ dependencies {
     // compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
     //adding volley library
-    
 
     //compile 'com.android.support:recyclerview-v7:25.0.0-rc1'
     testCompile 'junit:junit:4.12'
