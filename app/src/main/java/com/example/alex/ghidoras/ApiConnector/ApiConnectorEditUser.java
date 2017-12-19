@@ -9,14 +9,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by alex on 06.12.2017.
+ * Created by alex on 18.12.2017.
  */
 
-public class ApiConnectorEvent {
-    public static String ip = "http://192.168.1.6";
-    public static String apiURL = ip+ "/addEvent.php";
-    public static String apiURLEdit = ip+ "/editEvent.php";
-    public static String addEvent(String nume, String descriere, String id_locatie, String data_inceput, String data_sfarsit, String numar_persoane, String id_organizator) {
+public class ApiConnectorEditUser {
+
+    public static String ip = ApiConnectorEvent.ip;
+    public static String apiURL = ip+ "/editUser.php";
+    public static String deleteURL = ip+ "/deleteUser.php";
+    public static String editUser(String id,String email, String parola, String nume, String prenume,
+                                  String data_nasterii,String adresa, String sex) {
         HttpURLConnection connection = null;
 
         try {
@@ -25,13 +27,14 @@ public class ApiConnectorEvent {
 
 
             JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id", id);
+            jsonObject.put("email", email);
+            jsonObject.put("parola", parola);
             jsonObject.put("nume", nume);
-            jsonObject.put("descriere", descriere);
-            jsonObject.put("id_locatie", id_locatie);
-            jsonObject.put("id_organizator", id_organizator);
-            jsonObject.put("data_inceput", data_inceput);
-            jsonObject.put("data_sfarsit", data_sfarsit);
-            jsonObject.put("numar_persoane", numar_persoane);
+            jsonObject.put("prenume", prenume);
+            jsonObject.put("data_nasterii", data_nasterii);
+            jsonObject.put("adresa", adresa);
+            jsonObject.put("sex", sex);
 
             connection = (HttpURLConnection) url.openConnection();
             connection.setReadTimeout(15000);
@@ -67,23 +70,13 @@ public class ApiConnectorEvent {
         }
     }
 
-    public static String editEvent(String id_eveniment,String nume, String descriere, String id_locatie, String data_inceput, String data_sfarsit, String numar_persoane, String id_organizator) {
+    public static String deleteUser(String id) {
         HttpURLConnection connection = null;
 
         try {
-            URL url = new URL(apiURLEdit);
-
-
-
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("id_eveniment", id_eveniment);
-            jsonObject.put("nume", nume);
-            jsonObject.put("descriere", descriere);
-            jsonObject.put("id_locatie", id_locatie);
-            jsonObject.put("id_organizator", id_organizator);
-            jsonObject.put("data_inceput", data_inceput);
-            jsonObject.put("data_sfarsit", data_sfarsit);
-            jsonObject.put("numar_persoane", numar_persoane);
+            URL url = new URL(deleteURL);
+            JSONObject postDataParams = new JSONObject();
+            postDataParams.put("id_utilizator", id);
 
             connection = (HttpURLConnection) url.openConnection();
             connection.setReadTimeout(15000);
@@ -94,7 +87,7 @@ public class ApiConnectorEvent {
             connection.setDoInput(true);
             connection.setDoOutput(true);
             OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
-            out.write(jsonObject.toString());
+            out.write(postDataParams.toString());
             out.close();
             StringBuilder sb = new StringBuilder();
             sb.append("");
@@ -103,14 +96,15 @@ public class ApiConnectorEvent {
                 BufferedReader br = new BufferedReader(new InputStreamReader(
                         connection.getInputStream(), "utf-8"));
                 String line = null;
+
                 while ((line = br.readLine()) != null) {
                     sb.append(line + "\n");
                 }
                 br.close();
+
             } else {
                 System.out.println(connection.getResponseMessage());
             }
-            System.out.println("aici: " + sb.toString());
             return sb.toString();
         } catch (Exception e) {
             return new String("Exception: " + e.getMessage());

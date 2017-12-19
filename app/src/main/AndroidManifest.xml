@@ -44,7 +44,8 @@
             android:name=".Details"
             android:label="@string/title_activity_details"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".EditActivity"></activity>
+        <activity android:name=".EditActivity" />
+        <activity android:name=".EditProfile"></activity>
     </application>
 
 </manifest>

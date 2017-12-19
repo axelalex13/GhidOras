@@ -282,7 +282,7 @@ public class EditActivity extends AppCompatActivity {
                             }
 
                             protected void onPostExecute(Void param) {
-                                if (edit  .equals("add location succes\n")) {
+                                if (edit.equals("add location succes\n")) {
                                     final SweetAlertDialog alertDialog = new SweetAlertDialog(EditActivity.this, SweetAlertDialog.SUCCESS_TYPE);
 
                                     alertDialog.setTitle("Locatie adaugata cu succes!");

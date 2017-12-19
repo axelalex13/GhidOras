@@ -97,6 +97,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             coperta.setImageResource(R.drawable.biblioteca);
         }
 
+        if(dataSet.get(listPosition).getId_locatie() == 12)
+        {
+            coperta.setImageResource(R.drawable.poli);
+        }
+
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
