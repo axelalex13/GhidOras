@@ -9,28 +9,20 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by alex on 12.12.2017.
+ * Created by alex on 19.12.2017.
  */
 
-public class ApiConnectorOrganizator {
+public class ApiConnectorStatistics {
     public static String ip = ApiConnectorEvent.ip;
-    public static String apiURL = ip + "/addOrganizator.php";
-    public static String apiURLGet = ip + "/getOrganizator.php";
-
-
-
-    public static String addOrganizator(String descriere_organizator, String ocupatie_organizator, String id_utilizator) {
+    public static String apiURL = ip + "/statisticiTotalEvenimenteOrganizator.php";
+    public static String apiURLlocatii = ip + "/statisticiLocatiiOrganizator.php";
+    public static String totalOrganizator(String id) {
         HttpURLConnection connection = null;
 
         try {
             URL url = new URL(apiURL);
-
-
-
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("descriere_organizator", descriere_organizator);
-            jsonObject.put("ocupatie_organizator", ocupatie_organizator);
-            jsonObject.put("id_utilizator", id_utilizator);
+            jsonObject.put("id", id);
             connection = (HttpURLConnection) url.openConnection();
             connection.setReadTimeout(15000);
             connection.setConnectTimeout(15000);
@@ -64,14 +56,14 @@ public class ApiConnectorOrganizator {
             connection.disconnect();
         }
     }
-    public static String getOrganizator(int id) {
+
+    public static String locatiiOrganizator(String id) {
         HttpURLConnection connection = null;
 
         try {
-            URL url = new URL(apiURLGet);
-            JSONObject postDataParams = new JSONObject();
-            postDataParams.put("id", id);
-
+            URL url = new URL(apiURLlocatii);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id", id);
             connection = (HttpURLConnection) url.openConnection();
             connection.setReadTimeout(15000);
             connection.setConnectTimeout(15000);
@@ -81,7 +73,7 @@ public class ApiConnectorOrganizator {
             connection.setDoInput(true);
             connection.setDoOutput(true);
             OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
-            out.write(postDataParams.toString());
+            out.write(jsonObject.toString());
             out.close();
             StringBuilder sb = new StringBuilder();
             sb.append("");
@@ -90,15 +82,14 @@ public class ApiConnectorOrganizator {
                 BufferedReader br = new BufferedReader(new InputStreamReader(
                         connection.getInputStream(), "utf-8"));
                 String line = null;
-
                 while ((line = br.readLine()) != null) {
                     sb.append(line + "\n");
                 }
                 br.close();
-
             } else {
                 System.out.println(connection.getResponseMessage());
             }
+            System.out.println("aici: " + sb.toString());
             return sb.toString();
         } catch (Exception e) {
             return new String("Exception: " + e.getMessage());
@@ -106,6 +97,5 @@ public class ApiConnectorOrganizator {
             connection.disconnect();
         }
     }
-
 
 }

@@ -73,6 +73,18 @@
         android:layout_marginTop="19dp"
         android:text="Adresa" />
 
+    <TextView
+        android:id="@+id/dateOrg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/adresa"
+        android:layout_below="@+id/adresa"
+        android:layout_marginTop="19dp"
+        android:linksClickable="true"
+        android:text="Vezi date despre organizator"
+        android:textColor="@color/myBlue" />
+
+
 
     <RelativeLayout
         android:id="@+id/layoutActiuni"
@@ -111,5 +123,16 @@
             android:layout_toRightOf="@+id/imageViewBetween"/>
 
         </RelativeLayout>
+
+    <Button
+        android:id="@+id/particip"
+        android:background="@drawable/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/adresa"
+        android:layout_marginEnd="19dp"
+        android:layout_marginTop="37dp"
+        android:text="Particip" />
 
 </RelativeLayout>
