@@ -5,29 +5,119 @@
     android:layout_height="match_parent"
     android:id="@+id/statistici">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/backgroud"
+        android:scaleType = "centerCrop"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
 
     <TextView
         android:id="@+id/totalOrganizator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_marginStart="19dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="40dp"
         android:textSize="16sp"
         android:layout_marginRight="20dp"
-        android:text="Evenimente la care ai fost organizator: " />
+        android:text="Evenimente la care ai fost organizator: "
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/locatii"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:layout_marginRight="20dp"
         android:text="TextView"
         android:textSize="16sp"
         android:layout_below="@+id/totalOrganizator"
-        android:layout_alignStart="@+id/totalOrganizator" />
+        android:layout_alignStart="@+id/totalOrganizator"
+        android:textColor="@color/white"
+        android:layout_marginTop="11dp"/>
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Statisticile tale"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/locatii"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Statistici din aplicatie"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/utilizatoriAdulti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginRight="20dp"
+        android:text="Utilizatori activi"
+        android:textColor="@color/white"
+        android:layout_below="@+id/evenimente"
+        android:layout_alignStart="@+id/utilizatori"
+        android:layout_marginTop="11dp" />
+
+    <TextView
+        android:id="@+id/femei"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:textSize="16sp"
+        android:layout_marginRight="20dp"
+        android:text="TextView"
+        android:layout_below="@+id/utilizatoriAdulti"
+        android:layout_alignStart="@+id/utilizatoriAdulti"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/utilizatori"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_below="@+id/textView9"
+        android:layout_alignStart="@+id/locatii"
+        android:layout_marginTop="11dp"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/evenimente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="TextView"
+        android:textColor="@color/white"
+        android:layout_below="@+id/utilizatori"
+        android:layout_alignStart="@+id/utilizatoriAdulti"
+        android:layout_marginTop="11dp" />
+
+    <TextView
+        android:id="@+id/donatie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/femei"
+        android:layout_below="@+id/femei"
+        android:layout_marginTop="11dp"
+        android:text="TextView"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
 
 
 </RelativeLayout>

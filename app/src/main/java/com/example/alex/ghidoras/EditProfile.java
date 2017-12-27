@@ -75,7 +75,7 @@ public class EditProfile extends AppCompatActivity {
         prenume.setText(sharedPreferencesUser.getString("prenume",""));
         email.setText(sharedPreferencesUser.getString("email",""));
         adresa.setText(sharedPreferencesUser.getString("email",""));
-       // sex.setText(sharedPreferencesUser.getString("sex",""));
+        // sex.setText(sharedPreferencesUser.getString("sex",""));
         data_nasterii.setText(sharedPreferencesUser.getString("data_nasterii",""));
 
 
@@ -122,7 +122,7 @@ public class EditProfile extends AppCompatActivity {
                 final String prenumeString = prenume.getText().toString();
                 final String data_nasteriiS = data_nasterii.getText().toString();
                 final String emailString = email.getText().toString();
-                final String parolaString = parola.getText().toString();
+                final String parolaString = sharedPreferencesUser.getString("password","");
                 final String parolaConfirmString = parola_confirm.getText().toString();
                 final String adresaString = adresa.getText().toString();
                 final String id = sharedPreferencesUser.getString("id","");
@@ -135,14 +135,14 @@ public class EditProfile extends AppCompatActivity {
 
 
                 if(!numeString.equals("") && !prenumeString.equals("") && !data_nasteriiS.equals("") && !emailString.equals("") && !parolaString.equals("") && !adresaString.equals("") ) {
-                    if (parolaString.equals(parolaConfirmString)) {
+
                         AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 
 
                             @Override
                             protected Void doInBackground(Void... params) {
                                 editUser = ApiConnectorEditUser.editUser(id, emailString, parolaString,
-                                        numeString, prenumeString, data_nasteriiS, adresaString, sexString);
+                                        numeString, prenumeString, "1996-11-15", adresaString, sexString);
                                 Log.v("am primit la edit", editUser);
 
                                 return null;
@@ -181,9 +181,7 @@ public class EditProfile extends AppCompatActivity {
                         task.execute();
 
 
-                    } else {
-                        Toast.makeText(EditProfile.this, "Parolele nu coincid", Toast.LENGTH_SHORT).show();
-                    }
+
                 }else {
                     Toast.makeText(EditProfile.this, "Completati toate campurile!", Toast.LENGTH_SHORT).show();
                 }

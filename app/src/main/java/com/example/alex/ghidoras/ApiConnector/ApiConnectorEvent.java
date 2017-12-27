@@ -13,7 +13,7 @@ import java.net.URL;
  */
 
 public class ApiConnectorEvent {
-    public static String ip = "http://192.168.1.6";
+    public static String ip = "http://192.168.1.4";
     public static String apiURL = ip+ "/addEvent.php";
     public static String apiURLEdit = ip+ "/editEvent.php";
     public static String addEvent(String nume, String descriere, String id_locatie, String data_inceput, String data_sfarsit, String numar_persoane, String id_organizator) {
