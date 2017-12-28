@@ -22,14 +22,17 @@ public class Statistics extends AppCompatActivity {
     TextView utilizatori;
     TextView evenimente;
     TextView donatie;
+    TextView inactivi;
     int totalEvenimente;
     int totalEvenimenteFemei;
+    int totalOrganizatori;
+    int totalInactivi;
     String total;
     String total2;
     String total3;
 
     TextView femei;
-    String total4 , total5, total6,total7;
+    String total4 , total5, total6,total7,total8;
 
 
     @Override
@@ -45,7 +48,7 @@ public class Statistics extends AppCompatActivity {
         utilizatori = (TextView) findViewById(R.id.utilizatori);
         evenimente = (TextView) findViewById(R.id.evenimente);
         donatie = (TextView) findViewById(R.id.donatie);
-
+        inactivi = (TextView) findViewById(R.id.inactivi);
         femei = (TextView) findViewById(R.id.femei);
         final SharedPreferences sharedPreferencesUser = getSharedPreferences("userInfo", Context
                 .MODE_PRIVATE);
@@ -174,8 +177,30 @@ public class Statistics extends AppCompatActivity {
                 total6 =  total6.replace("[","");
                 total6 =  total6.replace("]","");
                 total6 =  total6.replace("\"","");
-
+                totalOrganizatori = Integer.parseInt(total6);
                 utilizatori.setText("Total utilizatori: " + total6);
+
+                AsyncTask<Void, Void, Void> task8 = new AsyncTask<Void, Void, Void>() {
+
+
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        total8 =  ApiConnectorStatistics.inactivi(id_organizator);
+                        Log.v("am primit la sta", total8);
+
+                        return null;
+                    }
+
+                    protected void onPostExecute(Void param) {
+                       totalInactivi = Integer.parseInt(total8);
+                        int procent2 = 0;
+                        procent2 = totalInactivi*100/totalOrganizatori;
+                        inactivi.setText("Total useri neactivi: " + procent2 + "%");
+
+                    }
+                };
+                task8.execute();
+
 
             }
         };

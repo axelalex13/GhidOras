@@ -178,7 +178,7 @@ public class EditActivity extends AppCompatActivity {
         task.execute();
 
         final SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
-        final TextView textView = (TextView) findViewById(R.id.editText9);
+        final EditText textView = (EditText) findViewById(R.id.editText9);
         // Initialize the textview with '0'
         int progress = seekBar.getProgress();
 
@@ -326,6 +326,7 @@ public class EditActivity extends AppCompatActivity {
             descriere.setText(EventFragment.events.get(position).getDescriere());
             startingDate.setText(EventFragment.events.get(position).getData_inceput());
             endingDate.setText(EventFragment.events.get(position).getData_sfarsit());
+            textView.setText(EventFragment.events.get(position).getNumar_persoane());
 
        }
 
