@@ -15,4 +15,8 @@
     <color name="gold">#FFD700</color>
     <color name="gri">#FBF3F1</color>
     <color name="transparent">#00ffffff</color>
+    <color name="blue_btn_bg_color">#000000</color>
+    <color name="blue_btn_bg_pressed_color">#000000</color>
+
+    <color name="gray_btn_bg_color">#000000</color>
 </resources>

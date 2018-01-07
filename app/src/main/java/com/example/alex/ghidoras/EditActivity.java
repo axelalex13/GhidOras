@@ -326,7 +326,8 @@ public class EditActivity extends AppCompatActivity {
             descriere.setText(EventFragment.events.get(position).getDescriere());
             startingDate.setText(EventFragment.events.get(position).getData_inceput());
             endingDate.setText(EventFragment.events.get(position).getData_sfarsit());
-            textView.setText(EventFragment.events.get(position).getNumar_persoane());
+            seekBar.setProgress(EventFragment.events.get(position).getNumar_persoane());
+            textView.setText(String.valueOf(EventFragment.events.get(position).getNumar_persoane()));
 
        }
 
@@ -375,8 +376,12 @@ public class EditActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(SweetAlertDialog sDialog) {
                                         alertDialog.dismiss();
+                                        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                                        getApplicationContext().startActivity(i);
+
                                     }
                                 });
+
 
                             } else {
                                 final SweetAlertDialog alertDialog = new SweetAlertDialog(EditActivity.this, SweetAlertDialog.WARNING_TYPE);

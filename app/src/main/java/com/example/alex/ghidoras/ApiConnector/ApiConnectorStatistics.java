@@ -16,7 +16,7 @@ public class ApiConnectorStatistics {
     public static String ip = ApiConnectorEvent.ip;
     public static String apiURL = ip + "/statisticiTotalEvenimenteOrganizator.php";
     public static String apiURLlocatii = ip + "/statisticiLocatiiOrganizator.php";
-    public static String apiURLAdulti = ip + "/statisticiUseriAdulti.php";
+    public static String apiURLAdulti = ip + "/statisticiEvenimenteCopii.php";
     public static String apiURLFemei = ip + "/statisticiEvenimenteOrganizateDeFemei.php";
     public static String apiURLUtilizatori = ip + "/statisticiTotalUtilizatori.php";
     public static String apiURLEvenimente = ip + "/statisticiTotalEvenimente.php";

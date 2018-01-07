@@ -98,18 +98,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:inputType="textMultiLine"
                 android:layout_below="@+id/textView4"
-                android:layout_alignStart="@+id/textView4" />
+               />
 
             <Button
-
                 android:id="@+id/addLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:text="Adauga o noua locatie"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:background="@drawable/button2"
                 android:layout_marginRight="20dp"
                 android:paddingRight="5dp"
@@ -192,7 +191,8 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="22dp"
                 android:enabled="false"
-                android:max="300">
+                android:max="300"
+                >
 
             </SeekBar>
 

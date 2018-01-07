@@ -3,28 +3,35 @@ package com.example.alex.ghidoras;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.Formatter;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
+
 public class IntroActivity extends AppCompatActivity {
+
 
     ImageView bunVenit;
     TextView bunVenitText;
     public static boolean isLogged;
-
+    public static String ip;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // remove title
-        //Remove title bar
-//        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-//Remove notification bar
-//        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("");
         getSupportActionBar().hide();
@@ -34,25 +41,6 @@ public class IntroActivity extends AppCompatActivity {
                 .MODE_PRIVATE);
 
         isLogged = sharedPreferences.getBoolean("logged", false);
-
-//        if (isLogged) {
-//
-//            Intent intent = new Intent(this, HomeActivity.class);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//            startActivity(intent);
-//        } else{
-//
-//            Intent intent = new Intent(this, MainActivity.class);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//            startActivity(intent);
-//
-//        }
-
-
 
         bunVenit = (ImageView) findViewById(R.id.bunVenit);
         bunVenitText = (TextView)findViewById(R.id.bunVenitText);
@@ -81,4 +69,9 @@ public class IntroActivity extends AppCompatActivity {
 
 
     }
+
+
+
 }
+
+

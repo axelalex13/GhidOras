@@ -8,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.net.Uri;
@@ -229,10 +231,11 @@ public class AddFragment extends Fragment {
         task.execute();
 
        final SeekBar seekBar = (SeekBar) view.findViewById(R.id.seekBar);
-        final TextView textView = (TextView) view.findViewById(R.id.editText9);
+        final EditText textView = (EditText) view.findViewById(R.id.editText9);
         // Initialize the textview with '0'
         int progress = seekBar.getProgress();
-
+        seekBar.getProgressDrawable().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
+        seekBar.getThumb().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
         textView.setText(Integer.toString(progress));
 //        textView.setEnabled(false);
         seekBar.setOnSeekBarChangeListener(

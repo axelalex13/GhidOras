@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ public class Details extends AppCompatActivity {
     TextView adresa;
     TextView numar;
     TextView dateOrg;
+    ImageView cover;
     RelativeLayout layoutActiuni;
     RelativeLayout details;
     Button delete;
@@ -54,6 +56,8 @@ public class Details extends AppCompatActivity {
        // getSupportActionBar().setTitle("Detalii eveniment");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        cover = (ImageView) findViewById(R.id.imageView5);
+
         position = getIntent().getIntExtra("position",100);
         nume = (TextView) findViewById(R.id.numeEveniment);
         descriere = (TextView) findViewById(R.id.descriere);
@@ -73,6 +77,25 @@ public class Details extends AppCompatActivity {
         }else {
             layoutActiuni.setAlpha(0);
             participa.setAlpha(1);
+        }
+
+        int id_locatie = EventFragment.events.get(position).getId_locatie();
+        if(id_locatie == 1)
+        {
+            cover.setImageResource(R.drawable.herastrau);
+        }
+        if(id_locatie == 3)
+        {
+            cover.setImageResource(R.drawable.teatrul_national);
+        }
+        if(id_locatie == 4)
+        {
+            cover.setImageResource(R.drawable.biblioteca);
+        }
+
+        if(id_locatie == 12)
+        {
+            cover.setImageResource(R.drawable.poli);
         }
 
         delete = (Button) findViewById(R.id.delete);
